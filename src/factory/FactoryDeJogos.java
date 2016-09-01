@@ -13,38 +13,39 @@ import jogo.Rpg;
 
 public class FactoryDeJogos {
 	
-	public Jogo criaJogoLuta(String nome, double preco, Set<Jogabilidade> jogabilidades) throws StringInvalidaException, PrecoInvalidoException{
-		Jogo game = new Luta(nome, preco, jogabilidades);
+	public Jogo criaJogoLuta(String jogoNome, double preco, Set<Jogabilidade> tiposJogabilidades, String estiloJogo) throws StringInvalidaException, PrecoInvalidoException{
+		Jogo game = new Luta(jogoNome, preco, tiposJogabilidades);
 		return game;
 	}
 	
-	public Jogo criaJogoRpg(String nome, double preco, Set<Jogabilidade> jogabilidades) throws StringInvalidaException, PrecoInvalidoException{
-		Jogo game = new Rpg(nome, preco, jogabilidades);
+	public Jogo criaJogoRpg(String jogoNome, double preco, Set<Jogabilidade> tiposJogabilidades, String estiloJogo) throws StringInvalidaException, PrecoInvalidoException{
+		Jogo game = new Rpg(jogoNome, preco, tiposJogabilidades);
 		return game;
 	}
 	
-	public Jogo criaJogoPlataforma(String nome, double preco, Set<Jogabilidade> jogabilidades) throws StringInvalidaException, PrecoInvalidoException{
-		Jogo game = new Plataforma(nome, preco, jogabilidades);
+	public Jogo criaJogoPlataforma(String jogoNome, double preco, Set<Jogabilidade> tiposJogabilidades, String estiloJogo) throws StringInvalidaException, PrecoInvalidoException{
+		Jogo game = new Plataforma(jogoNome, preco, tiposJogabilidades);
 		return game;
 	}
 	
-	public Jogo criaJogo(String nome, double preco, Set<Jogabilidade> jogabilidades) throws StringInvalidaException{
-		if(jogabilidades.equ)){
-			return criaJogoLuta(nome, preco, jogabilidades);
+	public Jogo criaJogo(String jogoNome, double preco, Set<Jogabilidade> tiposJogabilidades, String estiloJogo) throws StringInvalidaException, PrecoInvalidoException{
+		
+		if(estiloJogo.equalsIgnoreCase("Luta")){
+			
+			return criaJogoLuta(jogoNome, preco, tiposJogabilidades, estiloJogo);
 		}
-		if(jogabilidades.equals("Rpg"))
-	}
-
-}
-
-
-public Usuario criaUsuario(String nome, String login, String tipo) throws StringInvalidaException{
-	if (tipo.equalsIgnoreCase("Noob")){
-		return criaNoob(nome, login, tipo);
-	}
-	if(tipo.equalsIgnoreCase("Veterano")){
-		return criaVeterano(nome, login, tipo);
-	}
-	return null;
+		
+		if(estiloJogo.equalsIgnoreCase("Rpg")){
+		
+			return criaJogoRpg(jogoNome, preco, tiposJogabilidades, estiloJogo);
+		}
+		
+		if(estiloJogo.equalsIgnoreCase("Plataforma")){
+			
+			return criaJogoPlataforma(jogoNome, preco, tiposJogabilidades, estiloJogo);
+		}
 	
+		return null;
+	}
+
 }

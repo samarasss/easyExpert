@@ -1,7 +1,11 @@
 package loja;
 
+import java.util.Set;
+
 import excecoes.StringInvalidaException;
 import excecoes.ValorInvalidoException;
+import jogo.Jogabilidade;
+import jogo.Jogo;
 
 public class Facade {
 	
@@ -48,6 +52,16 @@ public class Facade {
 		}
 		return 0;
 			}
+	
+	public Jogo criaJogos(String jogoNome, double preco, Set<Jogabilidade> tiposJogabilidades, String estiloJogo){
+		try {
+			return lojaController.criaJogo(jogoNome, preco, tiposJogabilidades, estiloJogo);
+		} catch (Exception e) {
+		 System.out.println(e.getMessage());
+		}
+		
+		return null;
+	}
 
 
 }

@@ -14,23 +14,23 @@ public abstract class Jogo {
 	private int vezesJogadas;
 	private int vezesConcluidas;
 	private int maiorScore;
-	Set<Jogabilidade> jogabilidades;
+	Set<Jogabilidade> TiposJogabilidades;
 
-	public Jogo(String nome, double preco) throws StringInvalidaException, PrecoInvalidoException {
+	public Jogo(String jogoNome, double preco) throws StringInvalidaException, PrecoInvalidoException {
 
-		if (nome == null || nome.trim().isEmpty()) {
+		if (jogoNome == null || jogoNome.trim().isEmpty()) {
 			throw new StringInvalidaException("Nome nao pode ser nulo ou vazio.");
 		}
 		if (preco < 0) {
 			throw new PrecoInvalidoException("Preco nao pode ser negativo");
 		}
 
-		this.nome = nome;
+		this.nome = jogoNome;
 		this.preco = preco;
 		this.vezesConcluidas = 0;
 		this.vezesJogadas = 0;
 		this.maiorScore = 0;
-		jogabilidades = new HashSet<Jogabilidade>();
+		TiposJogabilidades = new HashSet<Jogabilidade>();
 	}
 
 	public Jogo(String nome, double preco, Set<Jogabilidade> jogabilidades)
@@ -48,7 +48,7 @@ public abstract class Jogo {
 		this.vezesConcluidas = 0;
 		this.vezesJogadas = 0;
 		this.maiorScore = 0;
-		this.jogabilidades = jogabilidades;
+		this.TiposJogabilidades = jogabilidades;
 	}
 
 	public abstract int registraJogada(int score, boolean venceu);

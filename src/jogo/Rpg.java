@@ -8,12 +8,12 @@ import excecoes.StringInvalidaException;
 public class Rpg extends Jogo{
 	public final static int TAXA_XP2 = 10;
 	
-	public Rpg(String nome, double preco) throws StringInvalidaException, PrecoInvalidoException {
-		super(nome, preco);
+	public Rpg(String jogoNome, double preco) throws StringInvalidaException, PrecoInvalidoException {
+		super(jogoNome, preco);
 	}
 	
-	public Rpg (String nome, double preco, Set<Jogabilidade> jogabilidades) throws StringInvalidaException, PrecoInvalidoException {
-		super(nome, preco, jogabilidades);
+	public Rpg (String jogoNome, double preco, Set<Jogabilidade> tiposJogabilidades) throws StringInvalidaException, PrecoInvalidoException {
+		super(jogoNome, preco, tiposJogabilidades);
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package loja;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -12,13 +11,10 @@ import excecoes.PrecoInvalidoException;
 import excecoes.StringInvalidaException;
 import excecoes.UpgradeInvalidoException;
 import excecoes.ValorInvalidoException;
+import factory.FactoryDeJogos;
 import factory.FactoryDeUsuario;
 import jogo.Jogabilidade;
 import jogo.Jogo;
-import jogo.Luta;
-import jogo.Plataforma;
-import jogo.Rpg;
-import usuario.Noob;
 import usuario.Usuario;
 import usuario.Veterano;
 
@@ -28,11 +24,14 @@ public class LojaController {
 	private List<Usuario> meusUsuarios;
 	private HashMap<String, Jogabilidade> mapJogabildades;
 	private FactoryDeUsuario factoryDeUsuario;
+	private FactoryDeJogos factoryDeJogos;
+
 	
 	public LojaController() {
 		this.meusUsuarios = new ArrayList<Usuario>();
 		this.initializeMap();
 		this.factoryDeUsuario = new FactoryDeUsuario();
+		this.factoryDeJogos = new FactoryDeJogos();
 	}
 
 	public void adicionaUsuario(String nome, String login, String tipo) throws StringInvalidaException {
@@ -45,6 +44,15 @@ public class LojaController {
 		
 		}
 		 
+	
+	public Jogo criaJogo(String jogoNome, double preco, Set<Jogabilidade> tiposJogabilidades, String estiloJogo)
+			throws StringInvalidaException, PrecoInvalidoException {
+		
+		
+		Jogo novoJogo = factoryDeJogos.criaJogo(jogoNome, preco, tiposJogabilidades, estiloJogo);
+		
+		return novoJogo;
+	}
 	
 
 	public void vendeJogo(String jogoNome, double preco, String jogabilidades, String estiloJogo, String loginUser) throws Exception {
@@ -126,21 +134,6 @@ public class LojaController {
 	public int getX2p(String login) {
 		Usuario buscado = this.buscaUsuario(login);
 		return buscado.getXp2();
-	}
-
-	private Jogo criaJogo(String jogoNome, double preco, Set<Jogabilidade> tiposJogabilidades, String estiloJogo)
-			throws StringInvalidaException, PrecoInvalidoException {
-
-		String estilo = estiloJogo.toLowerCase();
-		if (estilo.equals("rpg")) {
-			return new Rpg(jogoNome, preco, tiposJogabilidades);
-		} else if (estilo.equals("plataforma")) {
-			return new Plataforma(jogoNome, preco, tiposJogabilidades);
-		} else if (estilo.equals("luta")) {
-			return new Luta(jogoNome, preco, tiposJogabilidades);
-		} else {
-			return null;
-		}
 	}
 
 	private Set<Jogabilidade> createJogabilidades(String names1) {

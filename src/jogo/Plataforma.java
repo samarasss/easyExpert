@@ -8,12 +8,12 @@ import excecoes.StringInvalidaException;
 public class Plataforma extends Jogo {
 	public final static int MAXIMUM_SCORE = 100000;
 	public final static int TAXA_XP2 = 20;
-	public Plataforma(String nome, double preco) throws StringInvalidaException, PrecoInvalidoException {
-		super(nome, preco);
+	public Plataforma(String jogoNome, double preco) throws StringInvalidaException, PrecoInvalidoException {
+		super(jogoNome, preco);
 	}
 
-	public Plataforma(String nome, double preco, Set<Jogabilidade> jogabilidades) throws StringInvalidaException, PrecoInvalidoException {
-		super(nome, preco, jogabilidades);
+	public Plataforma(String jogoNome, double preco, Set<Jogabilidade> tiposJogabilidades) throws StringInvalidaException, PrecoInvalidoException {
+		super(jogoNome, preco, tiposJogabilidades);
 	}
 
 	@Override

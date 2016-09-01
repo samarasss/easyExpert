@@ -7,12 +7,12 @@ import excecoes.StringInvalidaException;
 
 public class Luta extends Jogo{
 
-	public Luta(String nome, double preco) throws StringInvalidaException, PrecoInvalidoException {
-		super(nome, preco);
+	public Luta(String jogoNome, double preco) throws StringInvalidaException, PrecoInvalidoException {
+		super(jogoNome, preco);
 	}
 	
-	public Luta (String nome, double preco, Set<Jogabilidade> jogabilidades) throws StringInvalidaException, PrecoInvalidoException {
-		super(nome, preco, jogabilidades);
+	public Luta (String jogoNome, double preco, Set<Jogabilidade> tiposJogabilidades) throws StringInvalidaException, PrecoInvalidoException {
+		super(jogoNome, preco, tiposJogabilidades);
 	}
 	
 	@Override
