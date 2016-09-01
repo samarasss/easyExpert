@@ -19,14 +19,14 @@ import usuario.Usuario;
 import usuario.Veterano;
 
 public class LojaController {
-	
+
 	public static final String FIM_DE_LINHA = System.lineSeparator();
 	private List<Usuario> meusUsuarios;
 	private HashMap<String, Jogabilidade> mapJogabildades;
 	private FactoryDeUsuario factoryDeUsuario;
 	private FactoryDeJogos factoryDeJogos;
 
-	
+
 	public LojaController() {
 		this.meusUsuarios = new ArrayList<Usuario>();
 		this.initializeMap();
@@ -35,67 +35,63 @@ public class LojaController {
 	}
 
 	public void adicionaUsuario(String nome, String login, String tipo) throws StringInvalidaException {
-			
-	
-			Usuario novoUser = factoryDeUsuario.criaUsuario(nome, login, tipo);
-			
-			meusUsuarios.add(novoUser);
-			
-		
-		}
-		 
-	
+
+		Usuario novoUser = factoryDeUsuario.criaUsuario(nome, login, tipo);
+
+		meusUsuarios.add(novoUser);
+	}
+
+
 	public Jogo criaJogo(String jogoNome, double preco, Set<Jogabilidade> tiposJogabilidades, String estiloJogo)
 			throws StringInvalidaException, PrecoInvalidoException {
-		
-		
+
+
 		Jogo novoJogo = factoryDeJogos.criaJogo(jogoNome, preco, tiposJogabilidades, estiloJogo);
-		
+
 		return novoJogo;
 	}
-	
+
 
 	public void vendeJogo(String jogoNome, double preco, String jogabilidades, String estiloJogo, String loginUser) throws Exception {
 
-		
-			Usuario buscado = this.buscaUsuario(loginUser);
-			Set<Jogabilidade> tiposJogabilidades = this.createJogabilidades(jogabilidades);
-			Jogo jogoVendido = this.criaJogo(jogoNome, preco, tiposJogabilidades, estiloJogo);
-			buscado.compraJogo(jogoVendido);
 
-	
-		
-	}
+		Usuario buscado = this.buscaUsuario(loginUser);
+		Set<Jogabilidade> tiposJogabilidades = this.createJogabilidades(jogabilidades);
+		Jogo jogoVendido = this.criaJogo(jogoNome, preco, tiposJogabilidades, estiloJogo);
+		buscado.compraJogo(jogoVendido);
 
-	public void registraJogada(String login, String nomeJogo, int score, boolean venceu) {
-		try {
-			Usuario usr = this.buscaUsuario(login);
-			usr.registradaJogada(nomeJogo, score, venceu);
-		} catch (Exception e) {
-			e.getMessage();
-		}
+
 
 	}
+
+	public void registraJogada(String login, String nomeJogo, int score, boolean venceu) throws Exception {
+
+		Usuario usr = this.buscaUsuario(login);
+		usr.registradaJogada(nomeJogo, score, venceu);
+
+	}
+
+
 
 	public void adicionaCredito(String login, double credito) throws ValorInvalidoException {
-		
-			if (credito < 0) {
-				throw new ValorInvalidoException("Credito nao pode ser negativo");
-			}
-			Usuario user = this.buscaUsuario(login);
-			user.setCredito(user.getCredito() + credito);
-		
+
+		if (credito < 0) {
+			throw new ValorInvalidoException("Credito nao pode ser negativo");
+		}
+		Usuario user = this.buscaUsuario(login);
+		user.setCredito(user.getCredito() + credito);
+
 	}
 
 	public Usuario buscaUsuario(String login) {
 		Usuario buscado = null;
 
-			for (int i = 0; i < meusUsuarios.size(); i++) {
-				if (meusUsuarios.get(i).getLogin().equals(login)) {
-					buscado = meusUsuarios.get(i);
-				}
+		for (int i = 0; i < meusUsuarios.size(); i++) {
+			if (meusUsuarios.get(i).getLogin().equals(login)) {
+				buscado = meusUsuarios.get(i);
 			}
-	
+		}
+
 		return buscado;
 	}
 
@@ -116,11 +112,11 @@ public class LojaController {
 	}
 
 	public double confereCredito(String login) {
-	
-			Usuario procurado = this.buscaUsuario(login);
-			return procurado.getCredito();
-		
-		
+
+		Usuario procurado = this.buscaUsuario(login);
+		return procurado.getCredito();
+
+
 	}
 
 	public String informacaoUsuarios() {

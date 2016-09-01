@@ -107,7 +107,11 @@ public abstract class Usuario {
 		}
 		return total;
 	}
+	
+	public abstract String toString();
+	
 
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Usuario) {

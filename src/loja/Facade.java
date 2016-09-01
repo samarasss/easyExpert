@@ -2,10 +2,11 @@ package loja;
 
 import java.util.Set;
 
-import excecoes.StringInvalidaException;
-import excecoes.ValorInvalidoException;
 import jogo.Jogabilidade;
 import jogo.Jogo;
+import usuario.Usuario;
+import excecoes.StringInvalidaException;
+import excecoes.ValorInvalidoException;
 
 public class Facade {
 	
@@ -17,7 +18,7 @@ public class Facade {
 		
 	}
 	
-	public void vendeJogo(String jogoNome, double preco, String jogabilidades, String estiloJogo, String loginUser) throws Exception {
+	public void vendeJogo(String jogoNome, double preco, String jogabilidades, String estiloJogo, String loginUser) {
 		
 		try { lojaController.vendeJogo(jogoNome, preco, jogabilidades, estiloJogo, loginUser);
 			
@@ -26,26 +27,28 @@ public class Facade {
 		}
 	}
 	
-	public void adicionaCredito(String login, double credito) throws ValorInvalidoException {
+	public void adicionaCredito(String login, double credito) {
 		try {lojaController.adicionaCredito(login, credito);
 			
-		} catch (Exception e) {
+		} catch (ValorInvalidoException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 	
-	public void criaUsuario(String nome, String login, String tipo) throws StringInvalidaException {
+	public void criaUsuario(String nome, String login, String tipo)  {
 		
 		try {lojaController.adicionaUsuario(nome, login, tipo);
 			
-		} catch (Exception e) {
+		} catch (StringInvalidaException e) {
 			System.out.println(e.getMessage());
+		} catch (Exception e) {
+		
 		}
 				
 	}
 	public double confereCredito(String login){
 		try {
-			return lojaController.confereCredito(login);
+		return lojaController.confereCredito(login);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -62,6 +65,52 @@ public class Facade {
 		
 		return null;
 	}
-
-
+	
+	public void registraJogada(String login, String nomeJogo, int score, boolean venceu){
+		
+		try {
+			lojaController.registraJogada(login, nomeJogo, score, venceu);
+	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		System.out.println(e.getMessage());;
+		}
+	}
+	
+	public Usuario buscaUsuario(String login){
+		
+		try {
+			lojaController.buscaUsuario(login);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
+	public void upgrade(String login){
+		
+		try {
+			lojaController.upgrade(login);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	public String informaçaoUsuarios(){
+		
+		try {
+			lojaController.informacaoUsuarios();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+	
+	public int getX2p(String login){
+		
+		try {
+			 return lojaController.getX2p(login);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} return 0;
+	}
 }
